@@ -11,7 +11,7 @@
     <div class="options">
         <mat-form-field class="example-form-field" appearance="fill">
             <mat-label>Añade una tarea</mat-label>
-            <input matInput type="text" [(ngModel)]="inputTodo">
+            <input matInput type="text" [(ngModel)]="inputTodo" [(ngModel)]="inputTodo" (keyup.enter) = "addTodo()">
             <button mat-button *ngIf="inputTodo" matSuffix mat-icon-button aria-label="Clear" (click)="inputTodo=''">
                 <mat-icon>close</mat-icon>
             </button>
@@ -21,13 +21,11 @@
     
     <div id="edit" class="edit notShow">
         <h3>Editar Todo</h3>
-        <mat-form-field class="example-form-field">
+        <mat-form-field class="example-form-field" appearance="fill">
             <mat-label>Edita el Todo...</mat-label>
-            <input matInput type="text" [(ngModel)]="selectedTodo.content">
-            <button mat-button *ngIf="selectedTodo.content" matSuffix mat-icon-button aria-label="Clear" (click)="editTodo(selectedTodo)">
-                <mat-icon>save</mat-icon>
-            </button>
+            <input matInput type="text" [(ngModel)]="selectedTodo.content" [(ngModel)]="selectedTodo.content" (keyup.enter) = "editTodo(selectedTodo)">
         </mat-form-field>
+        <button mat-raised-button color="primary" (click)="editTodo(selectedTodo)" class="buttons">Confirmar</button> 
     </div>
 
     <div class="allTodos">
