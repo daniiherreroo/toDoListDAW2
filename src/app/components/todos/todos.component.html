@@ -1,0 +1,54 @@
+<mat-toolbar color="primary">
+    <span>ToDoList</span>
+    <span class="example-spacer"></span>
+        <button mat-button color="accent" (click)="orderAlpha()">Ordenar alfabéticamente</button>
+        <button mat-button color="accent" (click)="orderDate()">Ordenar por fecha</button>
+        <button mat-button color="accent" (click)="orderState()">Ordenar por estado</button>
+    <span class="example-spacer"></span>
+
+</mat-toolbar>
+<div class="todos">
+    <div class="options">
+        <mat-form-field class="example-form-field" appearance="fill">
+            <mat-label>Añade una tarea</mat-label>
+            <input matInput type="text" [(ngModel)]="inputTodo">
+            <button mat-button *ngIf="inputTodo" matSuffix mat-icon-button aria-label="Clear" (click)="inputTodo=''">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="addTodo()" class="buttons">Añadir Tarea</button> 
+    </div>
+    
+    <div id="edit" class="edit notShow">
+        <h3>Editar Todo</h3>
+        <mat-form-field class="example-form-field">
+            <mat-label>Edita el Todo...</mat-label>
+            <input matInput type="text" [(ngModel)]="selectedTodo.content">
+            <button mat-button *ngIf="selectedTodo.content" matSuffix mat-icon-button aria-label="Clear" (click)="editTodo(selectedTodo)">
+                <mat-icon>save</mat-icon>
+            </button>
+        </mat-form-field>
+    </div>
+
+    <div class="allTodos">
+        <div>
+            <h1>Tareas</h1>
+            <div *ngFor="let todo of todos; let i=index;" class="todo {{(todo.completed ? 'done' : '')}} {{i % 2 !== 0 ? 'odd' : ''}}" >
+                <div class="box">
+                    <button mat-fab color="primary" aria-label="Eliminar" (click)="toggleDone(i)" class="buttons">
+                        <mat-icon>check</mat-icon>
+                    </button>
+                    <div class="content" (click)="toggleDone(i)">{{ todo.content }} </div>
+                    <div class="deleteContainer">
+                        <button mat-fab color="primary" aria-label="Editar" (click)="editTodo(todo)" class="buttons">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-fab color="primary" aria-label="Eliminar" (click)="deleteTodo(i)" class="buttons">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
